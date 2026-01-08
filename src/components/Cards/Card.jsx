@@ -1,15 +1,16 @@
 import { CardBody, CardContainer, CardFooter } from "./CardStyled";
 
 export function Card(props) {
+    console.log(props);
     return (
         <CardContainer>
 
             <CardBody>
                 <div>
                     <h2>{props.title}</h2>
-                    <p>{props.text}</p>
+                    <img src={props.banner} alt="Imagem" />
                 </div>
-                <img src={props.image} alt="Imagem" />
+                <p>{props.text}</p>
             </CardBody>
 
             <CardFooter>
