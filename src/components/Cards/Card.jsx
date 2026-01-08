@@ -1,7 +1,7 @@
 import { CardBody, CardContainer, CardFooter } from "./CardStyled";
+import { TextLimited } from "../TextLimit/TextLimited";
 
 export function Card(props) {
-    console.log(props);
     return (
         <CardContainer>
 
@@ -10,7 +10,7 @@ export function Card(props) {
                     <h2>{props.title}</h2>
                     <img src={props.banner} alt="Imagem" />
                 </div>
-                <p>{props.text}</p>
+                <TextLimited text={props.text} limit={180} />
             </CardBody>
 
             <CardFooter>
