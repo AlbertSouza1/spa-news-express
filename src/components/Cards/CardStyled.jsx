@@ -5,7 +5,8 @@ export const CardContainer = styled.section`
     flex-direction: column;
     gap: 1rem;
     max-width: 100%;
-    
+    height: 100%;
+
     box-shadow: rgba(50, 50, 105, 0.149) 0px 2px 5px 0px,
        rgba(0,0,0,0.05) 0px 1px 1px 0px;
     border-radius:0.3rem;
@@ -19,16 +20,24 @@ export const CardBody = styled.article`
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  flex: 1;
+  overflow: hidden; 
 
   img{
     width: 50%;
+    height: 200px;
     object-fit: cover;
     object-position: center;
   }
 
   h2{
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     font-weight: bold;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limita o título a 2 linhas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   div{
