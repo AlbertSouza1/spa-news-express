@@ -5,7 +5,7 @@ export function Card(props) {
     return (
         <CardContainer>
 
-            <CardBody>
+            <CardBody variant={props.variant}>
                 <div>
                     <h2>{props.title}</h2>
                     <img src={props.banner} alt="Imagem" />

@@ -24,17 +24,18 @@ export const CardBody = styled.article`
   overflow: hidden; 
 
   img{
-    width: 50%;
-    height: 200px;
+    min-width: 50%;
+    height: ${props => props.variant === "top" ? "320px" : "150px"};
     object-fit: cover;
     object-position: center;
   }
 
   h2{
+    font-size: ${props => props.variant === "top" ? "2.5rem" : "1.5rem"};
     margin-bottom: 0.5rem;
     font-weight: bold;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limita o título a 2 linhas */
+    -webkit-line-clamp: ${props => props.variant === "top"  ? "3" : "2"};
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -43,7 +44,7 @@ export const CardBody = styled.article`
   div{
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Espaço entre os elementos */
+    justify-content: space-between;
     width: 100%;
     gap: 1rem;
 

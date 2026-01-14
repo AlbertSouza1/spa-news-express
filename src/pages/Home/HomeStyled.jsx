@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { CardContainer } from "../../components/Cards/CardStyled";
 
 export const HomeBody = styled.section`
   display: grid;
@@ -19,24 +20,13 @@ export const HomeHeader = styled.section`
   margin: 1rem auto;
   max-height: 550px;
 
-  ${({ theme }) => `
-    section {
-      height: 100%;
-      width: 100%;
-      article:first-child {
-        img {
-          height: 320px !important; /* Imagem maior para o top news */
-        }
-        
-        h2 {
-          font-size: 1.5rem !important;
-          -webkit-line-clamp: 3 !important; /* Permite 3 linhas no título */
-        }
-      }
-    }
-  `}
-
   @media (max-width: 768px) {
     max-height: none;
   }
+
+  ${CardContainer}{
+    height: 100%;
+    width: 100%;
+  }
+  
 `;

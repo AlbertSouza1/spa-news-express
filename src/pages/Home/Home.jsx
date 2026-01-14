@@ -25,6 +25,7 @@ export default function Home() {
             <Navbar />
             <HomeHeader>
                 <Card
+                    variant={"top"}
                     title={topNews.title}
                     text={topNews.text}
                     banner={topNews.banner}
