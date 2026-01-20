@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import logo from '../../images/LogoBN.png';
 // import './Navbar.css';
 import { Button, Nav, Logo, InputSearchSpace } from './NavbarStyled'
@@ -18,6 +19,7 @@ export function Navbar() {
 
                 <Button>Entrar</Button>
             </Nav>
+            <Outlet/>
         </>
     )
 }
