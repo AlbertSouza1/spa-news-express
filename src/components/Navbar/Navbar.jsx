@@ -1,8 +1,17 @@
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import logo from '../../images/LogoBN.png';
 import { useForm } from "react-hook-form"
+import { Button, Nav, Logo, InputSearchSpace, ErrorSpan } from './NavbarStyled'
+import z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Button, Nav, Logo, InputSearchSpace } from './NavbarStyled'
+const searchSchema = z.object({
+    title: z.string()
+        .nonempty({ message: "A pesquisa não pode ser vazia." })
+        .refine(value => !/^\s*$/.test(value), {
+            message: "A pesquisa não pode ser vazia."
+        })
+});
 
 export function Navbar() {
 
@@ -11,7 +20,9 @@ export function Navbar() {
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm();
+    } = useForm({
+        resolver: zodResolver(searchSchema),
+    });
 
     const navigate = useNavigate();
 
@@ -42,6 +53,7 @@ export function Navbar() {
 
                 <Button>Entrar</Button>
             </Nav>
+            {errors.title && <ErrorSpan>{errors.title.message}</ErrorSpan>}
             <Outlet />
         </>
     )
