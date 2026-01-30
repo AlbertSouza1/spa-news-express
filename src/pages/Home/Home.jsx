@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Card } from "../../components/Cards/Card";
-import { Navbar } from "../../components/Navbar/Navbar";
 import * as newsService from "../../services/newsService.js";
 import { HomeBody, HomeHeader } from "./HomeStyled.jsx";
 

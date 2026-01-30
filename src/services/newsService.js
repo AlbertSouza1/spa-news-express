@@ -15,3 +15,8 @@ export async function getHomeNews() {
         news: filteredNews
     };
 }
+
+export async function searchNews(title) {
+    const response = await axios.get(`${baseURL}/news/search?title=${title}`);
+    return response.data?.data;
+}
