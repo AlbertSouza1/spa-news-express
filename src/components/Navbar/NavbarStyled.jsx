@@ -12,27 +12,6 @@ export const Nav = styled.nav`
   box-shadow: rgba(17, 17, 26, 0) 0px 1px 0px;
 `;
 
-export const Button = styled.button`
-  background-color: #0bade3;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  padding: 0.4rem;
-  color: #fff;
-  transition: all 0.4s ease-in-out;
-  cursor: pointer;
-  border-radius: 0.3rem;
-  font-family: Arial, Helvetica, sans-serif;
-  /* width: 10%; */
-  font-weight: 500;
-  letter-spacing: 0.1rem;
-  text-transform: uppercase;
-  
-  &:hover {
-    background-color: #0a86af;
-  }
-`;
-
 export const Logo = styled.img`
   width: 8rem;
   height: 3.5rem;
