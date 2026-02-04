@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const AuthContainer = styled.div`
-    height: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
