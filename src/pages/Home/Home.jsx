@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "../../components/Cards/Card";
 import * as newsService from "../../services/newsService.js";
 import { HomeBody, HomeHeader } from "./HomeStyled.jsx";
+import Cookies from "js-cookie";
 
 export default function Home() {
 

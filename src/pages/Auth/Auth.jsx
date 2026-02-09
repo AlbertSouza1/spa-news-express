@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { signupSchema } from "../../schemas/signupSchema";
 import { signinSchema } from "../../schemas/signinSchema";
 import * as userService from "../../services/userService";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export function Auth() {
 
@@ -29,14 +31,20 @@ export function Auth() {
         resolver: zodResolver(signinSchema),
     });
 
+    const navigate = useNavigate();
+
     function onSubmitSignin(data) {
         console.log(data);
     }
 
-    async function onSubmitSignUp(data) {
+    async function onSubmitSignUp(userData) {
         try {
-            const response = await userService.signup(data);
-            console.log(response);
+            const data = await userService.signup(userData);
+     
+            if(data){
+                Cookies.set("token", data.token, {expires: 7 });
+                navigate("/");
+            }
         } catch (error) {
             console.log(error);
         }
