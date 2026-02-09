@@ -33,16 +33,24 @@ export function Auth() {
 
     const navigate = useNavigate();
 
-    function onSubmitSignin(data) {
-        console.log(data);
+    async function onSubmitSignin(login) {
+        try {
+            const response = await userService.signin(login);
+
+            Cookies.set("token", response.data.data, { expires: 7 });
+            navigate("/");
+
+        } catch (error) {
+            alert(error.response.data.message);
+        }
     }
 
     async function onSubmitSignUp(userData) {
         try {
             const data = await userService.signup(userData);
-     
-            if(data){
-                Cookies.set("token", data.token, {expires: 7 });
+
+            if (data) {
+                Cookies.set("token", data.token, { expires: 7 });
                 navigate("/");
             }
         } catch (error) {
@@ -60,7 +68,7 @@ export function Auth() {
                 <form onSubmit={handleSubmitSignin(onSubmitSignin)}>
                     <Input type="text" placeholder="E-mail" name="email" register={registerSignin} />
                     {errorsSignin.email && <ErrorSpan>{errorsSignin.email.message}</ErrorSpan>}
-                    <Input type="text" placeholder="Password" name="password" register={registerSignin} />
+                    <Input type="password" placeholder="Password" name="password" register={registerSignin} />
                     {errorsSignin.password && <ErrorSpan>{errorsSignin.password.message}</ErrorSpan>}
                     <Button type="input" text="Entrar" />
                 </form>

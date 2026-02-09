@@ -13,3 +13,7 @@ export async function signup(userData) {
     const response = await axios.post(`${baseUrl}/users`, body);
     return response.data?.data;
 }
+
+export async function signin(login){
+    return await axios.post(`${baseUrl}/auth`, login);
+}
