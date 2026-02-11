@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const baseUrl = "http://localhost:3000";
 
@@ -16,4 +17,12 @@ export async function signup(userData) {
 
 export async function signin(login){
     return await axios.post(`${baseUrl}/auth`, login);
+}
+
+export async function getLoggedUser(){
+    return await axios.get(`${baseUrl}/users/logged`, {
+        headers:{
+            Authorization: `Bearer ${Cookies.get("token")}`
+        }
+    })
 }
