@@ -7,32 +7,37 @@ import { Navbar } from './components/Navbar/Navbar.jsx'
 import { GlobalStyled } from './GlobalStyled.jsx'
 import ErrorPage from './pages/Utils/ErrorPage.jsx'
 import { Auth } from './pages/Auth/Auth.jsx'
+import { Profile } from './pages/Profile/Profile.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navbar/>,
-    errorElement: <ErrorPage/>,
-    children:[
+    element: <Navbar />,
+    errorElement: <ErrorPage />,
+    children: [
       {
-        path:"/",
-        element: <Home/>
+        path: "/",
+        element: <Home />
       },
       {
-        path:"/search/:title",
-        element: <Search/>
+        path: "/search/:title",
+        element: <Search />
+      },
+      {
+        path: "/profile",
+        element: <Profile />
       }
     ]
   },
   {
-    path:"/auth",
-    element: <Auth/>
+    path: "/auth",
+    element: <Auth />
   }
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <GlobalStyled />
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </StrictMode>,
 )
