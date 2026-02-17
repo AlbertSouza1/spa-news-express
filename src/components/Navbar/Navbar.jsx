@@ -6,8 +6,9 @@ import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '../Button/Button';
 import * as userService from "../../services/userService";
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import { UserContext } from '../../Contexts/Contexts/UserContext';
 
 const searchSchema = z.object({
     title: z.string()
@@ -19,7 +20,7 @@ const searchSchema = z.object({
 
 export function Navbar() {
 
-    const [user, setUser] = useState(null);
+    const {user, setUser} = useContext(UserContext);
 
     const {
         register,
