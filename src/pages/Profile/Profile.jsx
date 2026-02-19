@@ -1,9 +1,25 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Contexts/Contexts/UserContext";
-import { ProfileActions, ProfileAvatar, ProfileBackground, ProfileContainer, ProfileHeader, ProfileIconAdd, ProfileIconEdit, ProfileUser } from "./ProfileStyled";
+import { ProfileActions, ProfileAvatar, ProfileBackground, ProfileContainer, ProfileHeader, ProfileIconAdd, ProfileIconEdit, ProfilePosts, ProfileUser } from "./ProfileStyled";
+import * as newsService from "../../services/newsService";
+import { Card } from "../../components/Cards/Card";
 
 export function Profile() {
     const { user } = useContext(UserContext);
+
+    const [news, setNews] = useState([]);
+
+
+    useEffect(() => {
+        async function findUserNews() {
+            console.log(user);
+            const response = await newsService.getAllNewsByUser(user.id);
+            setNews(response.data.data);
+            console.log(news);
+        }
+
+        findUserNews();
+    }, []);
 
     return (
         <ProfileContainer>
@@ -20,7 +36,7 @@ export function Profile() {
                 <ProfileUser>
                     <ProfileAvatar src={user.avatar} alt="foto do usuário" />
                     <h2>{user.name}</h2>
-                    <h3>{user.username}</h3>
+                    <h3>@{user.username}</h3>
                 </ProfileUser>
 
                 <ProfileActions>
@@ -33,6 +49,27 @@ export function Profile() {
                 </ProfileActions>
 
             </ProfileHeader>
+
+            <ProfilePosts>
+
+                {news.length === 0 &&
+                    <h2>Este usuário ainda não publicou nenhuma notícia...</h2>
+                }
+                {news.map((item) => {
+                    return (
+                        <Card
+                            key={item.id}
+                            title={item.title}
+                            text={item.text}
+                            banner={item.banner}
+                            likes={item.likes}
+                            comments={item.comments}
+                        />
+                    )
+                })}
+
+            </ProfilePosts>
+
         </ProfileContainer>
     );
 }
