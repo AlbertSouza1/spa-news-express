@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Cookies
- from 'js-cookie';
+from 'js-cookie';
 const baseURL = "http://localhost:3000";
 
 export async function getHomeNews() {
@@ -28,4 +28,12 @@ export async function getAllNewsByUser(userId) {
             Authorization: `Bearer ${Cookies.get("token")}`
         }
     });
+}
+
+export async function addNews(newsData) {
+    return await axios.post(`${baseURL}/news/`, newsData, {
+        headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`
+        }
+    })
 }

@@ -16,7 +16,6 @@ export function Auth() {
     const {
         register: registerSignup,
         handleSubmit: handleSubmitSignup,
-        reset: resetSignup,
         formState: { errors: errorsSignup },
     } = useForm({
         resolver: zodResolver(signupSchema),
@@ -25,7 +24,6 @@ export function Auth() {
     const {
         register: registerSignin,
         handleSubmit: handleSubmitSignin,
-        reset: resetSignin,
         formState: { errors: errorsSignin },
     } = useForm({
         resolver: zodResolver(signinSchema),
