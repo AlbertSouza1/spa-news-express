@@ -35,5 +35,13 @@ export async function addNews(newsData) {
         headers: {
             Authorization: `Bearer ${Cookies.get("token")}`
         }
-    })
+    });
+}
+
+export async function editNews(newsData) {
+    return await axios.patch(`${baseURL}/news/${newsData.id}`, newsData, {
+        headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`
+        }
+    });
 }

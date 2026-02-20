@@ -1,5 +1,5 @@
 import { Button } from "../../components/Button/Button";
-import { Input } from "../../components/Inputs/Input";
+import { Input } from "../../components/Inputs/Inputs";
 import { AuthContainer, Section } from "./AuthStyled";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { InputSpace } from "../../components/Inputs/InputStyled";
 
 export const NewsContainer = styled.div`
 
@@ -23,13 +22,12 @@ export const NewsContainer = styled.div`
         font-size: 1.2rem;
     }
 
+    textarea{
+        height: 40%;
+    }
+
     button{
         margin-top: 1.5rem;
         padding: 1rem;
     }
-`;
-
-export const TextArea = styled(InputSpace).attrs({ as: "textarea" })`
-    width: 70%;
-    height: 50%;
 `;

@@ -33,8 +33,8 @@ export const ProfileIconEdit = styled.i`
     transition: all 0.3s ease-in-out;
 
     svg{
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
     }
 
     &:hover{
@@ -89,8 +89,8 @@ export const ProfileIconAdd = styled.i`
     transition: all 0.3s ease-in-out;
 
     svg{
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
     }
 
     &:hover{
