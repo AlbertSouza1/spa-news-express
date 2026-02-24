@@ -5,7 +5,6 @@ export const CardContainer = styled.section`
     flex-direction: column;
     gap: 1rem;
     max-width: 100%;
-    height: 100%;
 
     box-shadow: rgba(50, 50, 105, 0.149) 0px 2px 5px 0px,
        rgba(0,0,0,0.05) 0px 1px 1px 0px;
@@ -35,7 +34,7 @@ export const CardBody = styled.article`
     margin-bottom: 0.5rem;
     font-weight: bold;
     display: -webkit-box;
-    -webkit-line-clamp: ${props => props.variant === "top"  ? "3" : "2"};
+    -webkit-line-clamp: ${props => props.variant === "top" ? "3" : "2"};
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -51,8 +50,15 @@ export const CardBody = styled.article`
     @media (max-width: 768px) {  
       flex-direction: column;
       align-items: center;  
+    }
   }
-}
+
+  a {
+    align-self: flex-end;
+    cursor: pointer;
+    color: #0bade3;
+  }
+
 `;
 
 export const CardFooter = styled.article`

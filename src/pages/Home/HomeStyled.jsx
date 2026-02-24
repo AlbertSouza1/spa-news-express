@@ -12,6 +12,10 @@ export const HomeBody = styled.section`
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
   }
+
+  ${CardContainer}{
+    height: 100%;
+  }
 `;
 
 export const HomeHeader = styled.section`

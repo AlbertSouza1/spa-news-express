@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as newsService from "../../services/newsService";
 import { useNavigate, useParams } from "react-router-dom";
 import { ErrorSpan } from "../../components/Navbar/NavbarStyled";
+import { useEffect } from "react";
 
 const newsSchema = z.object({
     title: z.string()
@@ -20,13 +21,15 @@ const newsSchema = z.object({
 
 export function ManageNews() {
 
-    const { action } = useParams();
+    const { id } = useParams();
+    const isEditing = !!id;
     const navigate = useNavigate();
 
     const {
         register: registerSubmitNews,
         handleSubmit: handleSubmitNews,
         formState: { errors: errors },
+        setValue,
     } = useForm({
         resolver: zodResolver(newsSchema)
     })
@@ -45,7 +48,8 @@ export function ManageNews() {
 
     async function editNewsSubmit(newsData) {
         try {
-            const response = await newsService.editNews(newsData);
+            const response = await newsService.editNews(newsData, id);
+            alert("Successfuly updated news.");
             console.log(response);
             navigate("/profile");
         } catch (error) {
@@ -53,22 +57,38 @@ export function ManageNews() {
         }
     }
 
+    useEffect(() => {
+        async function getEditingNews(id) {
+            try {
+                const data = (await newsService.getNewsById(id)).data.data;
+                setValue("title", data.title);
+                setValue("banner", data.banner);
+                setValue("text", data.text);
+            } catch (error) {
+                alert(error.response?.data?.message);
+            }
+        }
+        if (isEditing) {
+            getEditingNews(id);
+        }
+    }, []);
+
     return (
 
         <NewsContainer>
             <form onSubmit={
-                action == "add"
-                    ? handleSubmitNews(addNewsSubmit)
-                    : handleSubmitNews(editNewsSubmit)
+                isEditing
+                    ? handleSubmitNews(editNewsSubmit)
+                    : handleSubmitNews(addNewsSubmit)
             }>
-                <h1>{action == "add" ? "Publicar Nova Notícia" : "Editar Notícia"}</h1>
+                <h1>{isEditing ? "Editar Notícia" : "Publicar Nova Notícia"}</h1>
                 <Input type="text" placeholder="Título" name="title" register={registerSubmitNews} />
                 {errors.title && <ErrorSpan>{errors.title.message}</ErrorSpan>}
                 <Input type="text" placeholder="URL da capa" name="banner" register={registerSubmitNews} />
                 {errors.banner && <ErrorSpan>{errors.banner.message}</ErrorSpan>}
                 <TextArea type="text" placeholder="Conteúdo" name="text" register={registerSubmitNews} />
                 {errors.text && <ErrorSpan>{errors.text.message}</ErrorSpan>}
-                <Button type="submit" text={action == "add" ? "Publicar" : "Atualizar"}></Button>
+                <Button type="submit" text={isEditing ? "Atualizar" : "Publicar"}></Button>
             </form>
         </NewsContainer>
     )

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Cookies
-from 'js-cookie';
+    from 'js-cookie';
 const baseURL = "http://localhost:3000";
 
 export async function getHomeNews() {
@@ -38,8 +38,16 @@ export async function addNews(newsData) {
     });
 }
 
-export async function editNews(newsData) {
-    return await axios.patch(`${baseURL}/news/${newsData.id}`, newsData, {
+export async function editNews(newsData, id) {
+    return await axios.patch(`${baseURL}/news/${id}`, newsData, {
+        headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`
+        }
+    });
+}
+
+export async function getNewsById(id) {
+    return await axios.get(`${baseURL}/news/${id}`, {
         headers: {
             Authorization: `Bearer ${Cookies.get("token")}`
         }
