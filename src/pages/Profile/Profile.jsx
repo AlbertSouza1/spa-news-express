@@ -4,6 +4,7 @@ import { ProfileActions, ProfileAvatar, ProfileBackground, ProfileContainer, Pro
 import * as newsService from "../../services/newsService";
 import { Card } from "../../components/Cards/Card";
 import { Link } from "react-router-dom";
+import { Loader } from "../../components/Loader/Loader";
 
 export function Profile() {
     const { user } = useContext(UserContext);
@@ -21,7 +22,7 @@ export function Profile() {
         findUserNews();
     }, [user]);
 
-    if (!user) return null;
+    if (!user) return <Loader/>;
 
     return (
         <ProfileContainer>

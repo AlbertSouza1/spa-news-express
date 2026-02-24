@@ -20,7 +20,7 @@ const searchSchema = z.object({
 
 export function Navbar() {
 
-    const {user, setUser} = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     const {
         register,
@@ -52,7 +52,7 @@ export function Navbar() {
     useEffect(() => {
         async function getLoggedUser() {
             try {
-                const response = await userService.getLoggedUser();
+                const response = await userService.getLoggedUser();              
                 setUser(response.data.data);
             } catch (error) {
                 alert(error);
@@ -85,7 +85,7 @@ export function Navbar() {
 
                 {user ? (
                     <LoggedUserSpace>
-                        <Link to="/profile" style={{textDecoration: "none"}}>
+                        <Link to="/profile" style={{ textDecoration: "none" }}>
                             <h2>{user.name}</h2>
                         </Link>
                         <i title="Sair" onClick={signout}>
