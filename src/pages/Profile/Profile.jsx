@@ -3,14 +3,19 @@ import { UserContext } from "../../Contexts/Contexts/UserContext";
 import { ProfileActions, ProfileAvatar, ProfileBackground, ProfileContainer, ProfileHeader, ProfileIconAdd, ProfileIconEdit, ProfilePosts, ProfileUser } from "./ProfileStyled";
 import * as newsService from "../../services/newsService";
 import { Card } from "../../components/Cards/Card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
+import Cookies from "js-cookie";
 
 export function Profile() {
     const { user } = useContext(UserContext);
     const [news, setNews] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
+
+        if(!Cookies.get("token"))
+            navigate("/auth");
 
         if (!user) return;
 
