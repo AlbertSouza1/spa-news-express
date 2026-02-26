@@ -53,3 +53,11 @@ export async function getNewsById(id) {
         }
     });
 }
+
+export async function deleteNews(id) {
+    return await axios.delete(`${baseURL}/news/${id}`, {
+        headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`
+        }
+    });
+}

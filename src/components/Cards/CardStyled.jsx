@@ -56,11 +56,14 @@ export const CardInfo = styled.div`
 export const LinksWrapper = styled.div`
   display: flex;
   align-self: flex-end;
-  gap: 0.5rem;
+  gap: 1rem;
 
-  a {
+  a, button {
     cursor: pointer;
     color: #0bade3;
+    border: none;
+    background: none;
+    padding: 0;
   }
 `;
 
