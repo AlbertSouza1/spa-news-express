@@ -12,6 +12,7 @@ export function Card(props) {
             {
                 console.log(props.id);
                 await newsService.deleteNews(props.id);
+                props.onDelete && props.onDelete(props.id);
             }
         } catch (error) {
             console.log(error);

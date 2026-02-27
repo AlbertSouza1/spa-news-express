@@ -12,9 +12,13 @@ export function Profile() {
     const [news, setNews] = useState([]);
     const navigate = useNavigate();
 
+    function handleDelete(id) {
+        setNews(prev => prev.filter(item => item.id !== id));
+    }
+
     useEffect(() => {
 
-        if(!Cookies.get("token"))
+        if (!Cookies.get("token"))
             navigate("/auth");
 
         if (!user) return;
@@ -27,7 +31,7 @@ export function Profile() {
         findUserNews();
     }, [user]);
 
-    if (!user) return <Loader/>;
+    if (!user) return <Loader />;
 
     return (
         <ProfileContainer>
@@ -75,6 +79,7 @@ export function Profile() {
                             likes={item.likes}
                             comments={item.comments}
                             actions={true}
+                            onDelete={handleDelete}
                         />
                     )
                 })}
