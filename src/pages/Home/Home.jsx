@@ -3,26 +3,38 @@ import { Card } from "../../components/Cards/Card";
 import * as newsService from "../../services/newsService.js";
 import { HomeBody, HomeHeader } from "./HomeStyled.jsx";
 import { UserContext } from "../../Contexts/Contexts/UserContext.jsx";
+import { Loader } from "../../components/Loader/Loader.jsx";
 
 export default function Home() {
 
     const { user } = useContext(UserContext);
     const [news, setNews] = useState([]);
-    const [topNews, setTopNews] = useState({});
+    const [topNews, setTopNews] = useState(null);
+
+    const updateLikesArray = (likes = [], userId, isLiking) =>
+        isLiking
+            ? [...likes, { userId }]
+            : likes.filter(like => like.userId !== userId);
 
     const handleLike = async (newsId, isLiking) => {
-        const response = await newsService.toggleLike(newsId);
-        console.log("Resultado:" + response.data);
+        await newsService.toggleLike(newsId);
 
         setNews(prev => prev.map(item =>
             item.id === newsId
                 ? {
-                    ...item, likes: isLiking
-                        ? [...item.likes, user.id]
-                        : item.likes.filter(id => id !== user.id)
+                    ...item, likes: updateLikesArray(item.likes, user.id, isLiking)
                 }
                 : item
         ));
+
+        setTopNews(prev =>
+            prev?.id === newsId
+                ? {
+                    ...prev,
+                    likes: updateLikesArray(prev.likes, user.id, isLiking)
+                }
+                : prev
+        );
     };
 
     useEffect(() => {
@@ -38,22 +50,30 @@ export default function Home() {
 
     return (
         <>
-            <HomeHeader>
-                <Card
-                    variant={"top"}
-                    {...topNews}
-                    onLike={handleLike}
-                />
-            </HomeHeader>
-            <HomeBody>
-                {news.map(item =>
-                    <Card
-                        key={item.id}
-                        {...item}
-                        onLike={handleLike}
-                    />
-                )}
-            </HomeBody>
+            {
+                topNews && news?.length ? (
+                    <>
+                        <HomeHeader>
+                            <Card
+                                variant={"top"}
+                                {...topNews}
+                                onLike={handleLike}
+                            />
+                        </HomeHeader>
+                        <HomeBody>
+                            {news.map(item =>
+                                <Card
+                                    key={item.id}
+                                    {...item}
+                                    onLike={handleLike}
+                                />
+                            )}
+                        </HomeBody>
+                    </>
+                ) : (
+                    <Loader />
+                )
+            }
         </>
     )
 }

@@ -2,15 +2,19 @@ import { CardBody, CardContainer, CardFooter, CardInfo, LinksWrapper } from "./C
 import { TextLimited } from "../TextLimit/TextLimited";
 import { Link, useNavigate } from "react-router-dom";
 import * as newsService from "../../services/newsService";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../Contexts/Contexts/UserContext";
 
 export function Card(props) {
     const navigate = useNavigate();
+
     const { user } = useContext(UserContext);
     const actions = props.actions ? props.actions : false;
-    const [liked, setLiked] = useState(props.likes?.includes(user.id));
-    const [likesCount, setLikesCount] = useState(props.likes?.length || 0);
+
+    const hasUserLike = props.likes?.some(
+        like => like.userId === user?.id
+    );
+    const likesCount = props.likes?.length || 0;
 
     async function likeNews() {
         if (!user) {
@@ -18,10 +22,7 @@ export function Card(props) {
             return;
         }
 
-        const isLiking = !liked;
-        setLiked(isLiking);
-        setLikesCount(prev => isLiking ? prev + 1 : prev - 1);
-        props.onLike(props.id, isLiking);
+        props.onLike(props.id, !hasUserLike);
     }
     async function deleteNews() {
         try {
@@ -49,7 +50,7 @@ export function Card(props) {
                             </svg>
                         </Link>
                         <button onClick={deleteNews} title="Apagar notícia">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 17 17">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-x-circle" viewBox="0 0 17 17">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                             </svg>
@@ -68,11 +69,11 @@ export function Card(props) {
                     <button
                         onClick={likeNews}
                         aria-label="Curtir"
-                        aria-pressed={props.likes?.includes()}
+                        aria-pressed={hasUserLike}
                     >
                         {
-                            liked ?
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+                            hasUserLike ?
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
                                     <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a10 10 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733q.086.18.138.363c.077.27.113.567.113.856s-.036.586-.113.856c-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.2 3.2 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.8 4.8 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
                                 </svg> :
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
