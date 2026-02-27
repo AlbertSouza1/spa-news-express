@@ -61,3 +61,11 @@ export async function deleteNews(id) {
         }
     });
 }
+
+export async function toggleLike(newsId) {
+    return await axios.patch(`${baseURL}/news/like/${newsId}`, null, {
+        headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`
+        }
+    })
+}

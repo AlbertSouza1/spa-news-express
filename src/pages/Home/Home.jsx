@@ -1,13 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Card } from "../../components/Cards/Card";
 import * as newsService from "../../services/newsService.js";
 import { HomeBody, HomeHeader } from "./HomeStyled.jsx";
-import Cookies from "js-cookie";
+import { UserContext } from "../../Contexts/Contexts/UserContext.jsx";
 
 export default function Home() {
 
+    const { user } = useContext(UserContext);
     const [news, setNews] = useState([]);
     const [topNews, setTopNews] = useState({});
+
+    const handleLike = async (newsId, isLiking) => {
+        const response = await newsService.toggleLike(newsId);
+        console.log("Resultado:" + response.data);
+
+        setNews(prev => prev.map(item =>
+            item.id === newsId
+                ? {
+                    ...item, likes: isLiking
+                        ? [...item.likes, user.id]
+                        : item.likes.filter(id => id !== user.id)
+                }
+                : item
+        ));
+    };
 
     useEffect(() => {
         async function getNews() {
@@ -25,22 +41,16 @@ export default function Home() {
             <HomeHeader>
                 <Card
                     variant={"top"}
-                    title={topNews.title}
-                    text={topNews.text}
-                    banner={topNews.banner}
-                    likes={topNews.likes}
-                    comments={topNews.comments}
+                    {...topNews}
+                    onLike={handleLike}
                 />
             </HomeHeader>
             <HomeBody>
                 {news.map(item =>
                     <Card
                         key={item.id}
-                        title={item.title}
-                        text={item.text}
-                        banner={item.banner}
-                        likes={item.likes}
-                        comments={item.comments}
+                        {...item}
+                        onLike={handleLike}
                     />
                 )}
             </HomeBody>

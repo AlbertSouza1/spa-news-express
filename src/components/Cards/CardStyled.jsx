@@ -77,4 +77,14 @@ export const CardFooter = styled.article`
         align-items: center;
         gap: 0.2rem;
     }
+
+    button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
 `;
