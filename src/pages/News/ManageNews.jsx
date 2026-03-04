@@ -2,22 +2,12 @@ import { useForm } from "react-hook-form";
 import { Button } from "../../components/Button/Button";
 import { Input, TextArea } from "../../components/Inputs/Inputs";
 import { NewsContainer } from "./ManageNewsStyled";
-import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as newsService from "../../services/newsService";
 import { useNavigate, useParams } from "react-router-dom";
 import { ErrorSpan } from "../../components/Navbar/NavbarStyled";
 import { useEffect } from "react";
-
-const newsSchema = z.object({
-    title: z.string()
-        .nonempty({ message: "É obrigatório informar o título da notícia." }),
-    banner: z.string()
-        .nonempty({ message: "É obrigatório informar a imagem de capa." }),
-    text: z.string()
-        .nonempty({ message: "É obrigatório informar o conteúdo da notícia." }),
-
-});
+import { newsSchema } from "../../schemas/newsSchema";
 
 export function ManageNews() {
 
@@ -36,9 +26,7 @@ export function ManageNews() {
 
     async function addNewsSubmit(newsData) {
         try {
-            console.log(newsData);
-            const response = await newsService.addNews(newsData);
-            console.log(response);
+            await newsService.addNews(newsData);
             navigate("/profile");
 
         } catch (error) {
@@ -48,9 +36,8 @@ export function ManageNews() {
 
     async function editNewsSubmit(newsData) {
         try {
-            const response = await newsService.editNews(newsData, id);
+            await newsService.editNews(newsData, id);
             alert("Successfuly updated news.");
-            console.log(response);
             navigate("/profile");
         } catch (error) {
             alert(error.response?.data?.message);
