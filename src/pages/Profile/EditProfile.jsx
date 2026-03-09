@@ -9,6 +9,7 @@ import { UserContext } from "../../Contexts/Contexts/UserContext";
 import * as userService from "../../services/userService";
 import { editProfileSchema } from "../../schemas/editProfileSchema";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export function EditProfile() {
 
@@ -35,6 +36,12 @@ export function EditProfile() {
     }
 
     useEffect(() => {
+
+        if (!Cookies.get("token")) {
+            navigate("/auth");
+            return;
+        }
+
         function getProfileData() {
             try {
                 console.log("Rodou USE EFFECT");

@@ -18,8 +18,10 @@ export function Profile() {
 
     useEffect(() => {
 
-        if (!Cookies.get("token"))
+        if (!Cookies.get("token")) {
             navigate("/auth");
+            return;
+        }
 
         if (!user) return;
 

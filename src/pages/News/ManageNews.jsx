@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ErrorSpan } from "../../components/Navbar/NavbarStyled";
 import { useEffect } from "react";
 import { newsSchema } from "../../schemas/newsSchema";
+import Cookies from "js-cookie";
 
 export function ManageNews() {
 
@@ -30,7 +31,7 @@ export function ManageNews() {
             navigate("/profile");
 
         } catch (error) {
-            alert(error.response.data.message);
+            console.log(error);
         }
     }
 
@@ -40,11 +41,17 @@ export function ManageNews() {
             alert("Successfuly updated news.");
             navigate("/profile");
         } catch (error) {
-            alert(error.response?.data?.message);
+            console.log(error);
         }
     }
 
     useEffect(() => {
+
+        if (!Cookies.get("token")){
+            navigate("/auth");
+            return;
+        }
+
         async function getEditingNews(id) {
             try {
                 const data = (await newsService.getNewsById(id)).data.data;
@@ -52,7 +59,7 @@ export function ManageNews() {
                 setValue("banner", data.banner);
                 setValue("text", data.text);
             } catch (error) {
-                alert(error.response?.data?.message);
+                console.log(error);
             }
         }
         if (isEditing) {
