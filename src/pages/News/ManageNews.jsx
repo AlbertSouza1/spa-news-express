@@ -82,7 +82,7 @@ export function ManageNews() {
                 {errors.banner && <ErrorSpan>{errors.banner.message}</ErrorSpan>}
                 <TextArea type="text" placeholder="Conteúdo" name="text" register={registerSubmitNews} />
                 {errors.text && <ErrorSpan>{errors.text.message}</ErrorSpan>}
-                <Button type="submit" text={isEditing ? "Atualizar" : "Publicar"}></Button>
+                <Button type="submit" text={isEditing ? "Atualizar" : "Publicar"} disabled={false}></Button>
             </form>
         </NewsContainer>
     )

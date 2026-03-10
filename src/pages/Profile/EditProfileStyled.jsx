@@ -100,36 +100,21 @@ export const EditAvatar = styled.img`
     background-color: #e0f0f8;
 `;
 
-export const EditIconEdit = styled.i`
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    color: #0bade3;
-    background-color: #fff;
-    padding: 0.5rem;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-
-    svg {
-        width: 30px;
-        height: 30px;
-    }
-`;
-
 export const EditActions = styled.div`
     padding: 2rem;
     display: flex;
     align-items: flex-end;
 `;
 
-/* Painel de campos */
 export const FieldsPanel = styled.div`
+    margin-top: 0.5rem;
+    box-sizing: border-box;
     width: 100%;
     background: #fff;
-    border-radius: 0 0 0.3rem 0.3rem;
     border-top: 2px solid #e8f6fb;
-    box-shadow: rgba(50, 50, 105, 0.10) 0px 4px 12px 0px;
+    border-radius: 0.3rem;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
     padding: 2rem 2.5rem;
     display: flex;
     flex-direction: column;
@@ -184,27 +169,10 @@ export const ButtonRow = styled.div`
     gap: 1rem;
     margin-top: 0.5rem;
     justify-content: flex-end;
-`;
 
-export const SaveButton = styled.button`
-    padding: 0.75rem 2rem;
-    background-color: #0bade3;
-    color: #fff;
-    border: none;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
-
-    &:hover:not(:disabled) {
-        background-color: #0a86af;
-        transform: translateY(-1px);
-    }
-
-    &:disabled {
-        opacity: 0.65;
-        cursor: not-allowed;
+    button{
+        margin-top: 1.5rem;
+        padding: 1rem;
     }
 `;
 

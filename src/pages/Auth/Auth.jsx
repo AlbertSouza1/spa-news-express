@@ -68,7 +68,7 @@ export function Auth() {
                     {errorsSignin.email && <ErrorSpan>{errorsSignin.email.message}</ErrorSpan>}
                     <Input type="password" placeholder="Password" name="password" register={registerSignin} />
                     {errorsSignin.password && <ErrorSpan>{errorsSignin.password.message}</ErrorSpan>}
-                    <Button type="input" text="Entrar" />
+                    <Button type="input" text="Entrar" disabled={false} />
                 </form>
             </Section>
 
@@ -83,7 +83,7 @@ export function Auth() {
                     {errorsSignup.password && <ErrorSpan>{errorsSignup.password.message}</ErrorSpan>}
                     <Input type="password" placeholder="Confirmar senha" name="confirmPassword" register={registerSignup} />
                     {errorsSignup.confirmPassword && <ErrorSpan>{errorsSignup.confirmPassword.message}</ErrorSpan>}
-                    <Button type="input" text="Cadastrar" />
+                    <Button type="input" text="Cadastrar" disabled={false} />
                 </form>
             </Section>
         </AuthContainer>
