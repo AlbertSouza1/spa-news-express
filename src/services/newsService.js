@@ -1,7 +1,7 @@
 import axios from 'axios';
-import Cookies
-    from 'js-cookie';
-const baseURL = "http://localhost:3000";
+import Cookies from 'js-cookie';
+
+const baseURL = import.meta.env.VITE_API_URL;
 
 export async function getHomeNews() {
     const allNews = await axios.get(`${baseURL}/news`);
