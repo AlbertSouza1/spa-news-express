@@ -15,14 +15,12 @@ import {
     EditUser,
     EditAvatar,
     AvatarWrapper,
-    EditIconEdit,
     EditActions,
     FieldsPanel,
     FieldGroup,
     FieldLabel,
     FieldInput,
     FieldHint,
-    SaveButton,
     CancelButton,
     ButtonRow,
     EditTitle,
@@ -168,9 +166,7 @@ export function EditProfile() {
                     </FieldGroup>
 
                     <ButtonRow>
-                        <SaveButton type="submit" disabled={isSubmitting}>
-                            {isSubmitting ? "Salvando..." : "Salvar alterações"}
-                        </SaveButton>
+                        <Button type="submit" text={isSubmitting ? "Salvando..." : "Salvar alterações"} disabled={isSubmitting}></Button>
                     </ButtonRow>
 
                 </FieldsPanel>

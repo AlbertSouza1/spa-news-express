@@ -98,7 +98,7 @@ export function Navbar() {
                     </LoggedUserSpace>
                 ) : (
                     <Link to="/auth">
-                        <Button onClick={authenticate} type="button" text="Entrar" />
+                        <Button onClick={authenticate} type="button" text="Entrar" disabled={false} />
                     </Link>
                 )
                 }

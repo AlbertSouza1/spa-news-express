@@ -14,8 +14,14 @@ export const ButtonSpace = styled.button`
   font-weight: 500;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
-  
-  &:hover {
-    background-color: #0a86af;
-  }
+
+    &:hover:not(:disabled) {
+      background-color: #0a86af;
+      transform: translateY(-1px);
+    }
+
+    &:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
 `;
